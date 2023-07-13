@@ -55,8 +55,11 @@ import BackToLogin from "./component/User/BackToLogin.js"
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user)
+  let role = ""
+  if (user) {
+    role = user.role
+  }
 
-  const role = user.role
 
   const [stripeapikey, setStripeapikey] = useState("")
 
