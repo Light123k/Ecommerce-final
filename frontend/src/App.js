@@ -104,7 +104,7 @@ function App() {
         <Route exact path="/products/:keyword" element={<Products />} />
         <Route exact path="/search" element={<Search />} />
         <Route exact path="/login" element={<LoginSignUp />} />
-        <Route exact path="/account" element={<Profile />} />
+        <Route exact path="/account" element={isAuthenticated ? <Profile /> : <BackToLogin />} />
         <Route exact path="/me/update" element={isAuthenticated ? <UpdateProfile /> : <BackToLogin />} />
         <Route exact path="/password/update" element={isAuthenticated ? <UpdatePassword /> : <BackToLogin />} />
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
