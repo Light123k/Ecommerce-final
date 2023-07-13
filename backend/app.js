@@ -5,9 +5,9 @@ const fileupload = require("express-fileupload")
 const cors = require('cors')
 const path = require("path");
 
-if (process.env.NODE_ENV !== "PRODUCTION") {
-    require("dotenv").config({ path: "backend/config/config.env" });
-}
+
+require("dotenv").config({ path: "backend/config/config.env" });
+
 
 
 
