@@ -19,7 +19,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 //app.use(bodyparser.urlencoded({ extended: true }))
 app.use(fileupload())
 app.use(cors())
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "frontend", "build")));
 
 //getting all routes
 const product = require("./routes/productroute.js")
@@ -41,7 +41,7 @@ app.use("/api/v1", payment)
 
 
 app.use("*", function (req, res) {
-    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
 
