@@ -41,6 +41,7 @@ import UpdateUser from './component/admin/UpdateUser';
 import ProductReviews from './component/admin/ProductReviews';
 import About from './component/layout/About/About';
 import Contact from './component/layout/Contact/Contact';
+import BackToLogin from "./component/User/BackToLogin.js"
 
 // function Home() {
 //   return (
@@ -54,6 +55,8 @@ import Contact from './component/layout/Contact/Contact';
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user)
+
+  const role = user.role
 
   const [stripeapikey, setStripeapikey] = useState("")
 
@@ -98,14 +101,14 @@ function App() {
         <Route exact path="/products/:keyword" element={<Products />} />
         <Route exact path="/search" element={<Search />} />
         <Route exact path="/login" element={<LoginSignUp />} />
-        <Route exact path="/account" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route exact path="/me/update" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
-        <Route exact path="/password/update" element={<ProtectedRoute><UpdatePassword /></ProtectedRoute>} />
+        <Route exact path="/account" element={isAuthenticated ? <Profile /> : <BackToLogin />} />
+        <Route exact path="/me/update" element={isAuthenticated ? <UpdateProfile /> : <BackToLogin />} />
+        <Route exact path="/password/update" element={isAuthenticated ? <UpdatePassword /> : <BackToLogin />} />
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
         <Route exact path="/password/reset/:token" element={<ResetPassword />} />
         <Route exact path="/cart" element={<Cart />} />
-        <Route exact path="/login/shipping" element={<ProtectedRoute><Shipping /></ProtectedRoute>} />
-        <Route exact path="/order/confirm" element={<ProtectedRoute><ConfirmOrder /></ProtectedRoute>} />
+        <Route exact path="/login/shipping" element={isAuthenticated ? <Shipping /> : <BackToLogin />} />
+        <Route exact path="/order/confirm" element={isAuthenticated ? <ConfirmOrder /> : <BackToLogin />} />
         {stripeapikey && (
           <Route
             exact path="/order/payment"
@@ -117,18 +120,18 @@ function App() {
           />
         )}
 
-        <Route exact path="/success" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
-        <Route exact path="/orders" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
-        <Route exact path="/order/:id" element={<ProtectedRoute><OrderDetails /></ProtectedRoute>} />
-        <Route excat path="/admin/dashboard" element={<ProtectedRoute isAdmin={true}><Dashboard /></ProtectedRoute>} />
-        <Route excat path="/admin/products" element={<ProtectedRoute isAdmin={true}><ProductList /></ProtectedRoute>} />
-        <Route excat path="/admin/product" element={<ProtectedRoute isAdmin={true}><NewProduct /></ProtectedRoute>} />
-        <Route excat path="/admin/product/:id" element={<ProtectedRoute isAdmin={true}><UpdateProduct /></ProtectedRoute>} />
-        <Route excat path="/admin/orders" element={<ProtectedRoute isAdmin={true}><OrderList /></ProtectedRoute>} />
-        <Route excat path="/admin/order/:id" element={<ProtectedRoute isAdmin={true}><ProcessOrder /></ProtectedRoute>} />
-        <Route excat path="/admin/users" element={<ProtectedRoute isAdmin={true}><UsersList /></ProtectedRoute>} />
-        <Route excat path="/admin/user/:id" element={<ProtectedRoute isAdmin={true}><UpdateUser /></ProtectedRoute>} />
-        <Route excat path="/admin/reviews" element={<ProtectedRoute isAdmin={true}><ProductReviews /></ProtectedRoute>} />
+        <Route exact path="/success" element={isAuthenticated ? <OrderSuccess /> : <BackToLogin />} />
+        <Route exact path="/orders" element={isAuthenticated ? <MyOrders /> : <BackToLogin />} />
+        <Route exact path="/order/:id" element={isAuthenticated ? <OrderDetails /> : <BackToLogin />} />
+        <Route excat path="/admin/dashboard" element={isAuthenticated && role === "admin" ? <Dashboard /> : <BackToLogin />} />
+        <Route excat path="/admin/products" element={isAuthenticated && role === "admin" ? <ProductList /> : <BackToLogin />} />
+        <Route excat path="/admin/product" element={isAuthenticated && role === "admin" ? <NewProduct /> : <BackToLogin />} />
+        <Route excat path="/admin/product/:id" element={isAuthenticated && role === "admin" ? <UpdateProduct /> : <BackToLogin />} />
+        <Route excat path="/admin/orders" element={isAuthenticated && role === "admin" ? <OrderList /> : <BackToLogin />} />
+        <Route excat path="/admin/order/:id" element={isAuthenticated && role === "admin" ? <ProcessOrder /> : <BackToLogin />} />
+        <Route excat path="/admin/users" element={isAuthenticated && role === "admin" ? <UsersList /> : <BackToLogin />} />
+        <Route excat path="/admin/user/:id" element={isAuthenticated && role === "admin" ? <UpdateUser /> : <BackToLogin />} />
+        <Route excat path="/admin/reviews" element={isAuthenticated && role === "admin" ? <ProductReviews /> : <BackToLogin />} />
       </Routes>
 
       <Footer />
