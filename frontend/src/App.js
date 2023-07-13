@@ -86,7 +86,7 @@ function App() {
     getstripeapikey()
   }, [])
 
-
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
 
   return (
     <Router>
