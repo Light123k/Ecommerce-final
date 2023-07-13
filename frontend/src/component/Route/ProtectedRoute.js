@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route } from "react-router-dom";
 
-const ProtectedRoute = ({ isAdmin, children }) => {
+const ProtectedRoute = ({ isAdmin, children, ...rest }) => {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
 
   return (
