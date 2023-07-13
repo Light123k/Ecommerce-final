@@ -18,7 +18,7 @@ const About = () => {
                             src="https://res.cloudinary.com/drrybvx2x/image/upload/v1688279790/avatars/sgn96767saonpuytlhh0.jpg"
                             alt="Founder"
                         />
-                        <Typography>Abhishek Singh</Typography>
+                        <Typography>Abhishek Pandey</Typography>
 
                         <span>
                             An Ecommerce web application

@@ -32,7 +32,7 @@ export const removeItemsFromCart = (id) => async (dispatch, getState) => {
 };
 
 
-//SHIPPING INFO
+
 // SAVE SHIPPING INFO
 export const saveShippingInfo = (data) => async (dispatch) => {
     dispatch({
